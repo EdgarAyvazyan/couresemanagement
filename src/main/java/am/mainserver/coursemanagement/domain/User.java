@@ -1,10 +1,15 @@
 package am.mainserver.coursemanagement.domain;
 
 import am.mainserver.coursemanagement.common.RoleType;
+import com.google.common.collect.Lists;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
@@ -12,10 +17,11 @@ import java.util.*;
 
 
 @Entity
-@Table(name = "user")
+@Table(name = "`user`")
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 public class User implements UserDetails {
 
 
@@ -68,9 +74,10 @@ public class User implements UserDetails {
     private Set<Score> scores = new HashSet<>();
 
 
+    //TODO/**usage of this part???**/
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return Lists.newArrayList(new SimpleGrantedAuthority("ROLE_" + roleType.name()));
     }
 
     @Override
@@ -105,29 +112,45 @@ public class User implements UserDetails {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof User)) {
-            return false;
-        }
+        if (this == o) return true;
+
+        if (!(o instanceof User)) return false;
 
         User user = (User) o;
 
-        return email.equals(user.email);
-
+        return new EqualsBuilder()
+                .append(getId(), user.getId())
+                .append(getTitle(), user.getTitle())
+                .append(getFirstName(), user.getFirstName())
+                .append(getLastName(), user.getLastName())
+                .append(getAge(), user.getAge())
+                .append(getEmail(), user.getEmail())
+                .append(getDescription(), user.getDescription())
+                .append(getPhoneNumber(), user.getPhoneNumber())
+                .append(getRoleType(), user.getRoleType())
+                .append(getPasswordHash(), user.getPasswordHash())
+                .append(getCourses(), user.getCourses())
+                .append(getCourseScoreMap(), user.getCourseScoreMap())
+                .append(getScores(), user.getScores())
+                .isEquals();
     }
 
     @Override
     public int hashCode() {
-
-        int result;
-        long temp;
-        result = firstName.hashCode();
-        result = 31 * result + lastName.hashCode();
-        temp = Double.doubleToLongBits(Integer.parseInt(phoneNumber));
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        return result;
-
+        return new HashCodeBuilder(17, 37)
+                .append(getId())
+                .append(getTitle())
+                .append(getFirstName())
+                .append(getLastName())
+                .append(getAge())
+                .append(getEmail())
+                .append(getDescription())
+                .append(getPhoneNumber())
+                .append(getRoleType())
+                .append(getPasswordHash())
+                .append(getCourses())
+                .append(getCourseScoreMap())
+                .append(getScores())
+                .toHashCode();
     }
 }
