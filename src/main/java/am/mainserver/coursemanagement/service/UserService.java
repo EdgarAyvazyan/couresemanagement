@@ -7,5 +7,6 @@ import am.mainserver.coursemanagement.service.impl.EmailExistException;
 public interface UserService {
     User getByEmail(String email);
     User register(UserCreationRequestDto creationRequestDto)throws EmailExistException;
-
+    String getUserFullName(String email);
+    Long getUserId(String email);
 }

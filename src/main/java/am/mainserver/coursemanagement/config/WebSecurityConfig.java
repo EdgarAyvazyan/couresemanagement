@@ -1,4 +1,5 @@
 package am.mainserver.coursemanagement.config;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -30,12 +31,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.csrf().disable();
-        http.httpBasic().and().authorizeRequests()
-                .antMatchers("**/users/**").authenticated()
-                .antMatchers("**/users/register").permitAll()
-                .anyRequest().permitAll();
-//                .and()
-//                .formLogin().permitAll();
+        http.authorizeRequests().
+                antMatchers("**/secure/**")
+                .access("hasAnyRole('ROLE_ADMIN')")
+                .and().formLogin()
+                .loginPage("/login")
+                .loginProcessingUrl("/loggedin")
+                .usernameParameter("email")
+                .passwordParameter("password_hash")
+                .defaultSuccessUrl("/profile")
+                .and().logout().logoutSuccessUrl("/");
+
     }
 
     @Bean(name = "passwordEncoder")

@@ -24,6 +24,20 @@ public class UserServiceImpl implements UserService {
         return userOptional.orElseThrow(() -> new IllegalStateException("User is not found"));
     }
 
+
+    @Override
+    public String getUserFullName(String email) {
+        Assert.hasText(email, "email cannot be empty");
+
+        return getByEmail(email).getFirstName() + " " + getByEmail(email).getLastName();
+
+    }
+
+    @Override
+    public Long getUserId(String email) {
+        return userRepository.findByEmail(email).get().getId();
+    }
+
     @Override
     public User register(final UserCreationRequestDto creationRequest) throws EmailExistException {
         if(emailExist(creationRequest.getEmail())) {
@@ -43,9 +57,6 @@ public class UserServiceImpl implements UserService {
 
     private boolean emailExist(String email) {
         Optional<User> user = userRepository.findByEmail(email);
-        if (user.isPresent()) {
-            return true;
-        }
-        return false;
+        return user.isPresent();
     }
 }
