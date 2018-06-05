@@ -1,19 +1,25 @@
 package am.mainserver.coursemanagement.web;
 
+
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class MainRestController {
 
-    @RequestMapping(value = "/")
+    @GetMapping(value = "/")
     public String home(){
         return "home";
     }
 
-    @RequestMapping(value = "/login")
-    public String login(){
-        return "login";
+
+    @GetMapping(value = "/contact")
+    public String contact(){
+        return "contact";
+    }
+
+    @GetMapping(value = "/about")
+    public String about(){
+        return "about";
     }
 }
