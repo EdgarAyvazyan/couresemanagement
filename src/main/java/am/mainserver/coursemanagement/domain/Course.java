@@ -18,7 +18,7 @@ import java.util.Set;
 @ToString
 public class Course {
     @Id
-    @SequenceGenerator(name = "course_generator", sequenceName = "course_sequence")
+    @SequenceGenerator(name = "course_generator", sequenceName = "course_sequence",allocationSize = 1)
     @GeneratedValue(generator = "course_generator", strategy = GenerationType.SEQUENCE)
     private Long id;
 

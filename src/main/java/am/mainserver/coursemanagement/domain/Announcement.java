@@ -15,15 +15,16 @@ import javax.persistence.*;
 
 public class Announcement {
     @Id
-    @SequenceGenerator(name = "announcement_generator" , sequenceName = "announcement_sequence")
+    @SequenceGenerator(name = "announcement_generator" , sequenceName = "announcement_sequence",allocationSize = 1)
     @GeneratedValue(generator = "announcement_generator",strategy = GenerationType.SEQUENCE)
     private Long id;
+
+    @Column(name = "title")
+    private String title;
 
     @Column(name = "description")
     private String description;
 
-    @Column(name = "title")
-    private String title;
 
 
 

@@ -1,15 +1,40 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Profile</title>
-</head>
-<body>
-<h1 th:text="${message}"></h1>
-<h1 th:text="${userID}"></h1>
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+    <!--<title>Profile</title>-->
+    <!--<meta charset="UTF-8"/>-->
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1"/>-->
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>-->
+    <!--<link th:href="@{/css/homeStyle.css}" rel="stylesheet"/>-->
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+<!--</head>-->
+<!--<body>-->
 
-<form th:action="@{/logout}" method="post">
-    <input value="Logout" type="submit" />
-</form>
-</body>
-</html>
+<!--<nav class="navbar navbar-inverse">-->
+    <!--<div class="container-fluid">-->
+        <!--<div class="navbar-header">-->
+            <!--<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">-->
+                <!--<span class="icon-bar"></span>-->
+                <!--<span class="icon-bar"></span>-->
+                <!--<span class="icon-bar"></span>-->
+            <!--</button>-->
+            <!--<a class="navbar-brand" href="#"><span class="glyphicon glyphicon-education"></span></a>-->
+        <!--</div>-->
+        <!--<div class="collapse navbar-collapse" id="myNavbar">-->
+            <!--<ul class="nav navbar-nav">-->
+                <!--<li class="active"><a th:href="@{/profile/}">Home</a></li>-->
+                <!--<li><a th:href="@{/profile/about}">About</a></li>-->
+                <!--<li><a href="#">Courses</a></li>-->
+                <!--<li><a th:href="@{/profile/contact}">Contact</a></li>-->
+            <!--</ul>-->
+            <!--<ul class="nav navbar-nav navbar-right">-->
+                <!--<li id="user" th:text="${message}"></li>-->
+                <!--<li id="id" th:text="${userID}"></li>-->
+                <!--<li><a href="#" th:href="@{/logout}"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>-->
+            <!--</ul>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</nav>-->
+<!--</body>-->
+<!--</html>-->

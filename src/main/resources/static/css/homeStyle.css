@@ -1,12 +1,13 @@
-
-    /* Remove the navbar's default margin-bottom and rounded borders */
+/* Remove the navbar's default margin-bottom and rounded borders */
 .navbar {
     margin-bottom: 0;
     border-radius: 0;
 }
 
 /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-.row.content {height: 691px}
+.row.content {
+    height: 691px
+}
 
 /* Set gray background color and 100% height */
 .sidenav {
@@ -14,16 +15,82 @@
     background-color: #f1f1f1;
     height: 100%;
 }
+.companies{
+    height: 75%;
+    width: 105%;
+}
+#user {
+    margin-top: 14px;
+    color: gold;
+}
+
+#id {
+    margin-top: 14px;
+    margin-right: 50px;
+    margin-left: 3px;
+    color: gold;
+}
+
+#workfront {
+    height: 20px
+}
+
+#aca {
+    height: 40px;
+    width: 40px
+}
+
+#iuNetworks {
+    width: 60%
+}
+
+#SFL{
+    height: 65px;
+    width: 95px
+}
+
+#Staff{
+    height:40px;
+    width: 110px;
+}
+
+#Inomma{
+    height:50px;
+    width: 110px;
+}
+
+#Digitain{
+    height:70px;
+    width: 125px;
+}
+
+#Inecobank{
+    height:70px;
+    width: 125px;
+}
+
+#Git{
+    height:50px;
+    width: 135px;
+}
+
+#vmware{
+    height:50px;
+    width: 145px;
+}
 
 
-#workfront{height: 20px}
-#aca{height: 40px;width: 40px}
-#iuNetworks{width: 60%}
-#map{    height: 25%;
+#space{
+    height: 200px;
+}
+#map {
+    height: 25%;
     width: 100%;
     position: absolute;
     bottom: 0px;
-    left: 0px;}
+    left: 0px;
+}
+
 /* Set black background color, white text and some padding */
 footer {
     background-color: #555;
@@ -32,18 +99,31 @@ footer {
 
 }
 
+#companies_button {
+    display: none;
+}
 /* On small screens, set height to 'auto' for sidenav and grid */
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
     .sidenav {
         height: auto;
         padding: 15px;
     }
-    .row.content {height:auto;}
+
+    .row.content {
+        height: auto;
+    }
 }
 
-    @media (max-width: 768px) {
-        #map{
-            position: static;
-            width: 100%;
-        }
+@media (max-width: 768px) {
+    #map {
+        position: static;
+        width: 100%;
     }
+    #companies_button {
+        display: block;
+    }
+
+    .companies{
+        display: none;
+    }
+}
