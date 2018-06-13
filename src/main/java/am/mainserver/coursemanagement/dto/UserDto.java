@@ -9,6 +9,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -36,7 +37,9 @@ public class UserDto {
 
     private RoleType roleType;
 
-    private Set<CourseDto> courses;
+    private String passwordHash;
+
+    private Set<CourseDto> courses = new HashSet<>();
 
     private Map<CourseDto,ScoreDto> courseScoreMap = new HashMap<>();
 

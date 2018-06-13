@@ -4,10 +4,15 @@ package am.mainserver.coursemanagement.domain;
 import lombok.*;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.persistence.*;
+
+import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
+
+import static javax.persistence.TemporalType.DATE;
 
 
 @Entity
@@ -15,7 +20,6 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 public class Course {
     @Id
     @SequenceGenerator(name = "course_generator", sequenceName = "course_sequence",allocationSize = 1)
@@ -29,11 +33,16 @@ public class Course {
     private Integer duration;
 
     @Column(name = "description")
-    private String description;
+        private String description;
 
     @Column(name = "price")
     private Double price;
 
+    @Column(name = "start_date")
+    private Date startDate ;
+
+    @Column(name = "end_date")
+    private Date endDate ;
 
     @ManyToMany(mappedBy = "courses")
     private Set<User> users = new HashSet<>();
@@ -69,9 +78,23 @@ public class Course {
                 .append(getDuration())
                 .append(getDescription())
                 .append(getPrice())
-                .append(getUsers())
                 .append(getScores())
                 .toHashCode();
     }
 
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("name", name)
+                .append("duration", duration)
+                .append("description", description)
+                .append("price", price)
+                .append("startDate", startDate)
+                .append("endDate", endDate)
+                .append("users", users)
+                .append("scores", scores)
+                .toString();
+    }
 }

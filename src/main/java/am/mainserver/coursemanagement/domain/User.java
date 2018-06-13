@@ -8,6 +8,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,7 +22,6 @@ import java.util.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
 public class User implements UserDetails {
 
 
@@ -59,8 +59,13 @@ public class User implements UserDetails {
     @Column(name = "password_hash",nullable = false)
     private String passwordHash;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    private Set<Course> courses = new HashSet<>();
+    @OneToOne(mappedBy = "user",fetch = FetchType.EAGER)
+    private Image image;
+
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinTable(name = "user_course",joinColumns = {@JoinColumn(name = "user_id")}
+    ,inverseJoinColumns = {@JoinColumn(name = "course_id",unique = true)})
+    private Set<Course> courses;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_course_score",
@@ -148,9 +153,28 @@ public class User implements UserDetails {
                 .append(getPhoneNumber())
                 .append(getRoleType())
                 .append(getPasswordHash())
-                .append(getCourses())
                 .append(getCourseScoreMap())
                 .append(getScores())
                 .toHashCode();
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("title", title)
+                .append("firstName", firstName)
+                .append("lastName", lastName)
+                .append("age", age)
+                .append("email", email)
+                .append("description", description)
+                .append("phoneNumber", phoneNumber)
+                .append("roleType", roleType)
+                .append("passwordHash", passwordHash)
+                .append("image", image)
+                .append("courses", courses)
+                .append("courseScoreMap", courseScoreMap)
+                .append("scores", scores)
+                .toString();
     }
 }

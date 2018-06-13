@@ -8,6 +8,8 @@ import lombok.ToString;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import java.sql.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -27,7 +29,11 @@ public class CourseDto {
 
     private Double price;
 
-    private Set<UserDto> users;
+    private Date startDate;
+
+    private Date endDate;
+
+    private Set<UserDto> users = new HashSet<>();
 
 
     @Override

@@ -7,10 +7,14 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <link th:href="@{/css/homeStyle.css}" type="text/css" rel="stylesheet"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstra
-    p/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script th:src="@{/js/companies.js}" type="text/javascript"></script>
-    <!--<script th:src="@{/css/profileHomeStyle.css}" type="text/css" rel="stylesheet"></script>-->
+    <script th:inline="javascript" th:if="${action_successfull}">
+        /*<![CDATA[*/
+        var message = [[#{action.successfull}]];
+        alert(message);
+        /*]]>*/
+    </script>
 
 </head>
 
@@ -30,7 +34,14 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a th:href="@{/}">Home</a></li>
                 <li><a th:href="@{/profile/about}">About</a></li>
-                <li><a href="#">Courses</a></li>
+                <li>
+                    <div class="dropdown">
+                        <a class="dropbtn">Courses</a>
+                        <div class="dropdown-content">
+                            <a th:each="course:${courses}" th:text="${course.name}" th:href="@{/course(id=${course.id})}"></a>
+                        </div>
+                    </div>
+                </li>
                 <li><a th:href="@{/profile/contact}">Contact</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -38,29 +49,56 @@
                 <li id="id" th:text="${userID}"></li>
                 <li><a href="#" th:href="@{/logout}"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
             </ul>
+
+
         </div>
     </div>
 </nav>
 <div class="container-fluid text-center">
     <div class="row content">
 
-        <div class="col-sm-2 sidenav" >
+        <div class="col-sm-2 sidenav">
 
-            <button id="companies_button" type="button" class="btn btn-info" data-toggle="collapse" data-target=".companies">Companies</button>
+            <button id="companies_button" type="button" class="btn btn-info" data-toggle="collapse"
+                    data-target=".companies">Companies
+            </button>
 
-            <div  class="companies" style="overflow: scroll ; overflow-x:hidden ; height:100%">
-                <p><a href="https://www.workfront.com/" target="_blank"><img id="workfront" src="https://www.workfront.com/sites/default/files/workfront-logo.png"/></a></p>
-                <p><a href="http://aca.am/hy/" target="_blank"><img id= "aca" src="http://i.imgur.com/o27kplS.png"/></a></p>
-                <p><a href="http://iunetworks.am/" target="_blank"><img id="iuNetworks" src="http://iunetworks.am/img/vector/iu-network-logo-in-colors.svg"/></a></p>
-                <p><a href="http://energizeglobal.com/" target="_blank"><img id="EGS" src="http://energizeglobal.com/wp-content/uploads/2015/01/Untitled-1-e1421848815907.png"/></a></p>
-                <p><a href="https://sflpro.com/" target="_blank"><img id="SFL" src="https://sflpro.com/wp-content/uploads/2016/06/sfllogo-01.png"/></a></p>
-                <p><a href="https://staff.am/en" target="_blank"><img id="Staff" src="http://images.staff.am/upload/f/f/2/6/ff2690ae.png"/></a></p>
-                <p><a href="https://inomma.com//" target="_blank"><img id="Inomma" src="http://pacific.ba/tc_files/images/radnje/INOMA/inoma_logo.jpg"/></a></p>
-                <p><a href="https://www.digitain.com/" target="_blank"><img id="Digitain" src="https://armacad.info/images/2016/11/DigitainLogo-zK4dW-NLGLwioH-yvumHUbN8GMhx7dJv.jpg"/></a></p>
-                <p><a href="https://ggg.instigatedesign.com/#1" target="_blank"><img id="Instigate  " src="https://ggg.instigatedesign.com/assets/uploads/instigate_design3.svg"/></a></p>
-                <p><a href="https://www.inecobank.am/hy/%D5%BF%D5%B8%D6%82%D5%B6/" target="_blank"><img id="Inecobank" src="http://arka.am/upload/resize_cache/iblock/863/344_258_2/8635ec64e35a1730e86954ba18f43f41.jpg"/></a></p>
-                <p><a href="https://github.com/" target="_blank"><img id="Git" src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Logo.png"/></a></p>
-                <p><a href="https://www.vmware.com/asean.html" target="_blank"><img id="vmware" src="https://duo.com/assets/img/partners/select-partners/vmware.png"/></a></p>
+            <div class="companies" style="overflow: scroll ; overflow-x:hidden ; height:100%">
+                <p><a href="https://www.workfront.com/" target="_blank"><img id="workfront"
+                                                                             src="https://www.workfront.com/sites/default/files/workfront-logo.png"/></a>
+                </p>
+                <p><a href="http://aca.am/hy/" target="_blank"><img id="aca" src="http://i.imgur.com/o27kplS.png"/></a>
+                </p>
+                <p><a href="http://iunetworks.am/" target="_blank"><img id="iuNetworks"
+                                                                        src="http://iunetworks.am/img/vector/iu-network-logo-in-colors.svg"/></a>
+                </p>
+                <p><a href="http://energizeglobal.com/" target="_blank"><img id="EGS"
+                                                                             src="http://energizeglobal.com/wp-content/uploads/2015/01/Untitled-1-e1421848815907.png"/></a>
+                </p>
+                <p><a href="https://sflpro.com/" target="_blank"><img id="SFL"
+                                                                      src="https://sflpro.com/wp-content/uploads/2016/06/sfllogo-01.png"/></a>
+                </p>
+                <p><a href="https://staff.am/en" target="_blank"><img id="Staff"
+                                                                      src="http://images.staff.am/upload/f/f/2/6/ff2690ae.png"/></a>
+                </p>
+                <p><a href="https://inomma.com//" target="_blank"><img id="Inomma"
+                                                                       src="http://pacific.ba/tc_files/images/radnje/INOMA/inoma_logo.jpg"/></a>
+                </p>
+                <p><a href="https://www.digitain.com/" target="_blank"><img id="Digitain"
+                                                                            src="https://armacad.info/images/2016/11/DigitainLogo-zK4dW-NLGLwioH-yvumHUbN8GMhx7dJv.jpg"/></a>
+                </p>
+                <p><a href="https://ggg.instigatedesign.com/#1" target="_blank"><img id="Instigate  "
+                                                                                     src="https://ggg.instigatedesign.com/assets/uploads/instigate_design3.svg"/></a>
+                </p>
+                <p><a href="https://www.inecobank.am/hy/%D5%BF%D5%B8%D6%82%D5%B6/" target="_blank"><img id="Inecobank"
+                                                                                                        src="http://arka.am/upload/resize_cache/iblock/863/344_258_2/8635ec64e35a1730e86954ba18f43f41.jpg"/></a>
+                </p>
+                <p><a href="https://github.com/" target="_blank"><img id="Git"
+                                                                      src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Logo.png"/></a>
+                </p>
+                <p><a href="https://www.vmware.com/asean.html" target="_blank"><img id="vmware"
+                                                                                    src="https://duo.com/assets/img/partners/select-partners/vmware.png"/></a>
+                </p>
                 <p id="space"></p>
             </div>
             <iframe id="map"
@@ -79,14 +117,17 @@
                 </div>
                 <div class="panel-body">
                     <div class="row-fluid">
-                        <div class="span3">
-                            <img class="img-circle"
-                                 src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=100"
-                                 alt="User Pic"/>
+                        <div id="user_img" class="span3">
+                            <img th:src="@{'/images/userImages/' + ${image_file_name}}" style="width:100%"/>
                         </div>
+                        <form method="POST" action="/upload" enctype="multipart/form-data" style=" line-height: 7px;">
+                            <input type="file" th:name="file" value="Choose File"/><br/><br/>
+                            <input type="submit" value="Submit" style="line-height: 20px"/>
+                        </form>
+
                         <div class="span6">
-                            <strong>Cyruxx</strong><br/>
-                            <table class="table table-condensed table-responsive table-user-information" th:object="${user}">
+                            <table class="table table-condensed table-responsive table-user-information"
+                                   th:object="${user}">
                                 <tbody>
                                 <tr>
                                     <td>Title</td>
@@ -125,22 +166,80 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="panel-footer">
                     <button class="btn  btn-primary" type="button"
                             data-toggle="tooltip"
                             data-original-title="Send message to user"><i class="icon-envelope icon-white"></i>
                     </button>
-                    <span class="pull-right">
-                            <button class="btn btn-warning" type="button"
-                                    data-toggle="tooltip"
-                                    data-original-title="Edit this user"><i class="icon-edit icon-white"></i></button>
-                            <button class="btn btn-danger" type="button"
-                                    data-toggle="tooltip"
-                                    data-original-title="Remove this user"><i
-                                    class="icon-remove icon-white"></i></button>
-                        </span>
+
+                    <span th:if="!${create_course}">
+                        <button class="btn btn-warning" type="button"
+                                data-toggle="tooltip"
+                                data-original-title="Edit this user"><i
+                                class="icon-edit icon-white"></i>
+                        </button>
+                    </span>
+
+                    <span class="pull-right" th:if="${create_course}">
+                                <button class="btn btn-warning" type="button"
+                                        data-toggle="tooltip"
+                                        data-original-title="Edit this user"><i
+                                        class="icon-edit icon-white"></i></button>
+                                <button class="btn btn-danger" type="button"
+                                        data-toggle="tooltip"
+                                        data-original-title="Remove this user"
+                                        onclick="document.getElementById('course').style.display='block'"
+                                        style="width:auto;margin-right: -16px"><i
+                                        class="icon-remove icon-white" th:text="${create_course}"></i></button>
+                    </span>
                 </div>
             </div>
+        </div>
+
+        <div id="course" class="modal">
+            <span onclick="document.getElementById('course').style.display='none'" class="close" title="Close Modal">&times;</span>
+            <form class="modal-content" th:action="@{/create_course}" th:object="${course}" method="post">
+                <div class="container">
+                    <h1>Course creation form</h1>
+                    <p>Please fill in this form to create a course.</p>
+                    <hr/>
+                    <label th:for="name"><b>Name</b></label>
+                    <input type="text" placeholder="Enter name" name="name" th:field="*{name}" th:required="required"/>
+
+                    <label th:for="duration"><b>Duration</b></label>
+                    <input type="text" placeholder="Enter duration" name="duration" th:field="*{duration}"
+                           th:required="required"/>
+                    <label th:for="description"><b>Description</b></label>
+                    <input type="text" placeholder="Enter description" name="description" th:field="*{description}"
+                           th:required="required"/>
+
+                    <label th:for="price"><b>Price</b></label>
+                    <input type="text" placeholder="Enter price" name="price" th:field="*{price}"
+                           th:required="required"/>
+
+                    <label th:for="startDate"><b>Start Date</b></label>
+                    <input type="text"  placeholder="Enter start date" name="startDate" th:field="*{startDate}" th:required="required"/>
+
+                    <label th:for="endDate"><b>End Date</b></label>
+                    <input type="text"  placeholder="Enter start date" name="startDate" th:field="*{endDate}" th:required="required"/>
+
+                    <label>
+                        <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"/> Remember
+                        me
+                    </label>
+
+                    <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms &amp;
+                        Privacy</a>.</p>
+
+                    <div class="clearfix">
+                        <button type="button" onclick="document.getElementById('course').style.display='none'"
+                                class="cancelbtn">Cancel
+                        </button>
+                        <button type="submit" class="signupbtn">Create</button>
+                    </div>
+                </div>
+            </form>
         </div>
 
         <div class="col-sm-2 sidenav" style="overflow: scroll ; overflow-x:hidden ; height:100%">
@@ -148,13 +247,12 @@
                 <h3 th:text="${announcement.getTitle()}"></h3>
                 <p th:text="${announcement.getDescription()}"></p>
             </div>
-
         </div>
-
     </div>
 </div>
 <footer class="container-fluid text-center">
-    <p>&copy; Copyright 2018. Yerevan, RA. </p> <p>Authors: Armen Aslikyan &amp; Edgar Ayvazyan</p>
+    <p>&copy; Copyright 2018. Yerevan, RA. </p>
+    <p>Authors: Armen Aslikyan &amp; Edgar Ayvazyan</p>
 </footer>
 </body>
 </html>
