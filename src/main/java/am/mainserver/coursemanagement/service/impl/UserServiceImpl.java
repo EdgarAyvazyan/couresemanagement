@@ -66,6 +66,7 @@ public class UserServiceImpl implements UserService {
                     courseDto.setDescription(course.getDescription());
                     courseDto.setDuration(course.getDuration());
                     courseDto.setPrice(course.getPrice());
+                    courseDto.setTutor(course.getTutor());
                     courseDto.setStartDate(course.getStartDate());
                     courseDto.setEndDate(course.getEndDate());
                     return courseDto;
@@ -94,6 +95,7 @@ public class UserServiceImpl implements UserService {
                     course1.setDescription(course.getDescription());
                     course1.setDuration(course.getDuration());
                     course1.setPrice(course.getPrice());
+                    course1.setTutor(course.getTutor());
                     course1.setStartDate(course.getStartDate());
                     course1.setEndDate(course.getEndDate());
                     return course1;
@@ -144,6 +146,7 @@ public class UserServiceImpl implements UserService {
                     course.setDescription(course_element.getDescription());
                     course.setDuration(course_element.getDuration());
                     course.setPrice(course_element.getPrice());
+                    course.setTutor(course_element.getTutor());
                     course.setStartDate(course_element.getStartDate());
                     course.setEndDate(course_element.getEndDate());
                     return course;

@@ -12,7 +12,6 @@ import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import static javax.persistence.TemporalType.DATE;
 
 
 @Entity
@@ -37,6 +36,9 @@ public class Course {
 
     @Column(name = "price")
     private Double price;
+
+    @Column(name = "tutor")
+    private String tutor;
 
     @Column(name = "start_date")
     private Date startDate ;
@@ -65,6 +67,7 @@ public class Course {
                 .append(getDuration(), course.getDuration())
                 .append(getDescription(), course.getDescription())
                 .append(getPrice(), course.getPrice())
+                .append(getTutor(),course.getTutor())
                 .append(getUsers(), course.getUsers())
                 .append(getScores(), course.getScores())
                 .isEquals();
@@ -78,6 +81,7 @@ public class Course {
                 .append(getDuration())
                 .append(getDescription())
                 .append(getPrice())
+                .append(getTutor())
                 .append(getScores())
                 .toHashCode();
     }
@@ -91,6 +95,7 @@ public class Course {
                 .append("duration", duration)
                 .append("description", description)
                 .append("price", price)
+                .append("tutor",tutor)
                 .append("startDate", startDate)
                 .append("endDate", endDate)
                 .append("users", users)

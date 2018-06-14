@@ -29,6 +29,8 @@ public class CourseDto {
 
     private Double price;
 
+    private String tutor;
+
     private Date startDate;
 
     private Date endDate;
@@ -50,6 +52,7 @@ public class CourseDto {
                 .append(getDuration(), courseDto.getDuration())
                 .append(getDescription(), courseDto.getDescription())
                 .append(getPrice(), courseDto.getPrice())
+                .append(getTutor(),courseDto.getTutor())
                 .append(getUsers(), courseDto.getUsers())
                 .isEquals();
     }
@@ -61,6 +64,7 @@ public class CourseDto {
                 .append(getName())
                 .append(getDuration())
                 .append(getDescription())
+                .append(getTutor())
                 .append(getPrice())
                 .append(getUsers())
                 .toHashCode();

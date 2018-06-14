@@ -68,6 +68,7 @@ public class UserController {
         model.addAttribute("userID", "with userId " + userService.getUserId(principal.getName()));
         model.addAttribute("announcements", announcementService.getAnnouncements());
         model.addAttribute("courses",courseService.getCourses());
+
         if (imageService.getImageByUserId(userService.getUserId(principal.getName())) != null) {
             String[] tokens = imageService.getImageByUserId(userService.getUserId(principal.getName())).getImageUrl().split("\\\\");
             String file_name = tokens[4];
