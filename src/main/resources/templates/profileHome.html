@@ -110,7 +110,7 @@
                     src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=us&amp;geocode=&amp;q=yerevan&amp;sll=40.1792,44.4991&amp;sspn=340.1792,44.4991&amp;t=h&amp;ie=UTF8&amp;hq=&amp;hnear=Yerevan,+Armenia&amp;z=11&amp;ll=40.1792,44.4991&amp;output=embed">
             </iframe>
         </div>
-        <div class="col-sm-8 text-left">
+        <div class="col-sm-8 text-left" id="profile">
             <div class="panel panel-primary" id="user_profile">
                 <div class="panel-heading">
                     <h3 class="panel-title">User information</h3>
@@ -161,16 +161,23 @@
                                     <td>Role Type</td>
                                     <td th:text="${user.roleType}"></td>
                                 </tr>
+
+                                <tr>
+                                    <td>Enrolled Coourses</td>
+                                    <td th:each="course:${user.getCourses()}" th:text="${course.name}"></td>
+                                </tr>
+
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
 
-                <div class="panel-footer">
-                    <button class="btn  btn-primary" type="button"
-                            data-toggle="tooltip"
-                            data-original-title="Send message to user"><i class="icon-envelope icon-white"></i>
+
+                <div class="panel-footer" th:if="${user_edit}">
+                    <button  onclick="document.getElementById('userEdit').style.display='block'" class="btn  btn-primary" type="button"
+                             data-toggle="tooltip"
+                             data-original-title="Send message to user"><i class="icon-envelope icon-white"></i>Edit
                     </button>
 
                     <span th:if="!${create_course}">
@@ -183,8 +190,9 @@
 
                     <span class="pull-right" th:if="${create_course}">
                                 <button class="btn btn-warning" type="button"
+                                        onclick="document.getElementById('students').style.display='block'"
                                         data-toggle="tooltip"
-                                        data-original-title="Edit this user"><i
+                                        data-original-title="Edit this user">Show Students<i
                                         class="icon-edit icon-white"></i></button>
                                 <button class="btn btn-danger" type="button"
                                         data-toggle="tooltip"
@@ -196,6 +204,7 @@
                 </div>
             </div>
         </div>
+
 
         <div id="course" class="modal">
             <span onclick="document.getElementById('course').style.display='none'" class="close" title="Close Modal">&times;</span>
@@ -242,6 +251,30 @@
             </form>
         </div>
 
+
+
+        <div id="students" class="modal modal-content">
+            <span onclick="document.getElementById('students').style.display='none'" class="close" title="Close Modal">&times;</span>
+
+                <div class="container">
+                    <h1>Created Course</h1>
+
+                    <table class="table table-condensed table-responsive table-user-information">
+                        <tbody>
+
+                        <tr th:each="course:${students}">
+                            <td><a th:text="${course.name}" th:href="@{/students(id=${course.id})}" style="font-size: 30px"></a></td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+        </div>
+
+
+
+
         <div class="col-sm-2 sidenav" style="overflow: scroll ; overflow-x:hidden ; height:100%">
             <div class="well" th:each="announcement : ${announcements}">
                 <h3 th:text="${announcement.getTitle()}"></h3>
@@ -249,6 +282,54 @@
             </div>
         </div>
     </div>
+</div>
+
+
+<div id="userEdit" class="modal">
+    <span onclick="document.getElementById('userEdit').style.display='none'" class="close" title="Close Modal">&times;</span>
+    <form class="modal-content" th:action="@{/editUserInfo(id=${userDto.id})}" th:object="${userDto}" method="post">
+        <div class="container">
+            <h1>User Information Editing Form</h1>
+            <p>Please fill in this form to edit a course.</p>
+            <hr/>
+            <label th:for="title"><b>Title</b></label>
+            <input type="text" placeholder="Enter name" name="title"  th:field="*{title}" th:required="required" />
+
+            <label th:for="firstName"><b>First Name</b></label>
+            <input type="text" placeholder="Enter name" name="first name"  th:field="*{firstName}" th:required="required" />
+
+            <label th:for="lastName"><b>Last Name</b></label>
+            <input type="text" placeholder="Enter name" name="last name"  th:field="*{lastName}" th:required="required" />
+
+            <label th:for="age"><b>Age</b></label>
+            <input type="text" placeholder="Enter name" name="age"  th:field="*{age}" th:required="required" />
+
+            <label th:for="email"><b>Email</b></label>
+            <input type="text" placeholder="Enter name" name="email"  th:field="*{email}" th:required="required" />
+
+            <label th:for="description"><b>Description</b></label>
+            <input type="text" placeholder="Enter description" name="description"  th:field="*{description}"  />
+
+            <label th:for="password"><b>Password</b></label>
+            <input type="password" placeholder="Password" name="password"  th:field="*{passwordHash}" th:required="required"/>
+
+            <label th:for="phoneNumber"><b>Phone Number</b></label>
+            <input type="text" placeholder="Phone Number" name="phone number"  th:field="*{phoneNumber}" th:required="required" />
+
+            <label><b>Role Type</b></label>
+            <select th:field="*{roleType}" title="roleType">
+                <option th:value="STUDENT" th:text="STUDENT"></option>
+                <option th:value="TUTOR" th:text="TUTOR"></option>
+            </select>
+
+            <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms &amp; Privacy</a>.</p>
+
+            <div class="clearfix">
+                <button type="button" onclick="document.getElementById('userEdit').style.display='none'" class="cancelbtn">Cancel</button>
+                <button type="submit" class="signupbtn">Update</button>
+            </div>
+        </div>
+    </form>
 </div>
 <footer class="container-fluid text-center">
     <p>&copy; Copyright 2018. Yerevan, RA. </p>

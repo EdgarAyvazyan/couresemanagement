@@ -4,7 +4,7 @@
     <title>Register</title>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link th:href="@{css/registerStyle.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/registerStyle.css}" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 
@@ -21,24 +21,23 @@
             <option th:value="MRS" th:text="MRS"></option>
         </select>
         <label><b>First Name</b></label>
-        <input type="text" placeholder="First Name" name="first_name" th:field="*{firstName}"
-               th:required="required"/>
+        <input type="text" placeholder="First Name" name="first_name" th:field="*{firstName}" th:required="required"/>
 
         <label><b>Last Name</b></label>
         <input type="text" placeholder="Last Name" name="last_name" th:field="*{lastName}" th:required="required"/>
 
         <label><b>Age</b></label>
-        <input type="text" placeholder="Age" name="age" th:field="*{age}"/>
+        <input type="text" placeholder="Age" name="age" th:field="*{age}" th:required="required"/>
 
-        <label><b>Email</b></label>
+        <label ><b>Email</b></label>
+        <p th:if="${ifEmailValid}" th:text="#{email.validate}" style="color: #f44336"></p>
         <input type="text" placeholder="Email" name="email" th:field="*{email}" th:required="required"/>
 
         <label><b>Password</b></label>
-        <input type="password" placeholder="Password" name="password" th:field="*{passwordHash}"
-               th:required="required"/>
+        <input type="password" placeholder="Password" name="password" th:field="*{passwordHash}" th:required="required"/>
 
         <label><b>Phone Number</b></label>
-        <input type="text" placeholder="Phone Number" name="phone_number" th:field="*{phoneNumber}"/>
+        <input type="text" placeholder="Phone Number" name="phone_number" th:field="*{phoneNumber}" th:required="required"/>
 
         <label><b>Role Type</b></label>
         <select th:field="*{roleType}" title="roleType">

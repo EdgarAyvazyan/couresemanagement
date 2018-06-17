@@ -15,6 +15,8 @@ import org.springframework.util.Assert;
 
 import java.util.Optional;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Service
@@ -56,6 +58,7 @@ public class UserServiceImpl implements UserService {
         userDto.setAge(user.getAge());
         userDto.setEmail(user.getEmail());
         userDto.setDescription(user.getDescription());
+        userDto.setPasswordHash(user.getPasswordHash()  );
         userDto.setPhoneNumber(user.getPhoneNumber());
         userDto.setRoleType(user.getRoleType());
         final Set<CourseDto> courseDtoList = user.getCourses().stream()
@@ -85,6 +88,7 @@ public class UserServiceImpl implements UserService {
         user.setAge(userDto.getAge());
         user.setEmail(userDto.getEmail());
         user.setDescription(userDto.getDescription());
+        user.setPasswordHash(userDto.getPasswordHash());
         user.setPhoneNumber(userDto.getPhoneNumber());
         user.setRoleType(userDto.getRoleType());
         final Set<Course> courseList = userDto.getCourses().stream()
@@ -153,5 +157,12 @@ public class UserServiceImpl implements UserService {
                 }).collect(Collectors.toSet());
         user.setCourses(courseSet);
         return userRepository.save(user);
+    }
+
+    @Override
+    public Boolean isValidEmail(String email) {
+        Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
     }
 }

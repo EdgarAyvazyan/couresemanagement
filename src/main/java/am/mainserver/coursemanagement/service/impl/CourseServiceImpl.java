@@ -63,6 +63,7 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public Course convertToCourse(CourseDto courseDto) {
         final Course course = new Course();
+        course.setId(courseDto.getId());
         course.setName(courseDto.getName());
         course.setDescription(courseDto.getDescription());
         course.setDuration(courseDto.getDuration());
@@ -87,6 +88,37 @@ public class CourseServiceImpl implements CourseService {
                 }).collect(Collectors.toSet());
         course.setUsers(userSet);
         return course;
+    }
+
+
+    @Override
+    public CourseDto convertToCourseDto(Course course) {
+        final CourseDto courseDto = new CourseDto();
+        courseDto.setId(course.getId());
+        courseDto.setName(course.getName());
+        courseDto.setDescription(course.getDescription());
+        courseDto.setDuration(course.getDuration());
+        courseDto.setPrice(course.getPrice());
+        courseDto.setTutor(course.getTutor());
+        courseDto.setStartDate(course.getStartDate());
+        courseDto.setEndDate(course.getEndDate());
+        final Set<UserDto> userDtoSet = courseDto.getUsers().stream()
+                .map(userDto -> {
+                    final UserDto userDto1 = new UserDto();
+                    userDto1.setId(userDto.getId());
+                    userDto1.setFirstName(userDto.getFirstName());
+                    userDto1.setLastName(userDto.getLastName());
+                    userDto1.setDescription(userDto.getDescription());
+                    userDto1.setTitle(userDto.getTitle());
+                    userDto1.setAge(userDto.getAge());
+                    userDto1.setEmail(userDto.getEmail());
+                    userDto1.setRoleType(userDto.getRoleType());
+                    userDto1.setPasswordHash(userDto.getPasswordHash());
+                    userDto1.setPhoneNumber(userDto.getPhoneNumber());
+                    return userDto1;
+                }).collect(Collectors.toSet());
+        courseDto.setUsers(userDtoSet);
+        return courseDto;
     }
 
     @Override

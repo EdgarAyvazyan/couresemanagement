@@ -118,6 +118,8 @@ footer {
 }
 
 @media (max-width: 768px) {
+
+
     #map {
         position: static;
         width: 100%;
@@ -134,7 +136,6 @@ footer {
         width: 100%;
     }
 }
-
 
 #bg{
     background-image: url('/images/animationBackground/anime.jpg');
@@ -204,6 +205,10 @@ input[type=text]:focus, input[type=password]:focus {
     padding-top: 50px;
 }
 
+.container-fluid{
+    font-size: 14px;
+}
+
 /* Modal Content/Box */
 .modal-content {
     background-color: #fefefe;
@@ -244,6 +249,7 @@ hr {
     padding: 4px 10px;
 }
 
+
 /* Change styles for cancel button and signup button on extra small screens */
 @media screen and (max-width: 768px) {
     .cancelbtn, .signupbtn {
@@ -255,6 +261,10 @@ hr {
     }
     .nav>li{
         width: 100px;
+    }
+    .col-sm-2, .col-sm-8 {
+        padding-left: unset;
+        padding-right: unset;
     }
 }
 

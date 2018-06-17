@@ -34,7 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable();
         http.authorizeRequests().
-                antMatchers("**/secure/**").access("hasAnyRole('ROLE_ADMIN')")
+                 antMatchers("**/secure/**").access("hasAnyRole('ROLE_ADMIN')")
                 .antMatchers("**/profile/**").permitAll()
                 .and().formLogin()
                 .loginPage("/login")
@@ -51,8 +51,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean(name = "iamgeBase64Encoder")
-    public Base64.Encoder getimageEncoder(){return null;}
+
+
 }
 
 

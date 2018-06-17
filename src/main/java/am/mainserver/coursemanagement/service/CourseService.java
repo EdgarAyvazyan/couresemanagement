@@ -12,6 +12,7 @@ public interface CourseService {
     void createCourse(CourseDto courseDto) throws CourseExistException;
     Course getByNameAndStartDateAndEndDate(String name, Date t1, Date t2);
     Course convertToCourse(CourseDto courseDto);
+    CourseDto convertToCourseDto(Course course);
     List<Course> getCourses();
     Course getCourseById(Long id);
     Course update(Long courseId,CourseDto updatedCourse);

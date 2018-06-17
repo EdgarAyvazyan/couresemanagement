@@ -5,7 +5,6 @@ import com.google.common.collect.Lists;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -14,6 +13,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.sql.Blob;
 import java.util.*;
 
 
@@ -46,7 +46,7 @@ public class User implements UserDetails {
     @Column(name = "email",nullable = false)
     private String email;
 
-    @Column(name = "description")
+    @Column(name = "description",length = 2500)
     private String description;
 
     @Column(name = "phone_number")
@@ -64,7 +64,7 @@ public class User implements UserDetails {
 
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinTable(name = "user_course",joinColumns = {@JoinColumn(name = "user_id")}
-    ,inverseJoinColumns = {@JoinColumn(name = "course_id",unique = true)})
+    ,inverseJoinColumns = {@JoinColumn(name = "course_id")})
     private Set<Course> courses;
 
     @ManyToMany(cascade = CascadeType.ALL)

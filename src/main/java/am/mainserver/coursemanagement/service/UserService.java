@@ -19,4 +19,6 @@ public interface UserService {
     User convertToUser(UserDto userDto);
 
     User update(Long userId,User updatedUser);
+
+    Boolean isValidEmail(String email);
 }
